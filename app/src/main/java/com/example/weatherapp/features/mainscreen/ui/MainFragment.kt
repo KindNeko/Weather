@@ -7,17 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.weatherapp.R
 import com.example.weatherapp.base.ext.asFormattedString
-import com.example.weatherapp.base.ext.iconLeft
+import com.example.weatherapp.base.ext.asText
+import com.example.weatherapp.base.ext.loadImage
 import com.example.weatherapp.databinding.FragmentMainBinding
 import com.example.weatherapp.features.mainscreen.domain.WeatherInteractor
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
-import java.math.BigDecimal
 
 
 class MainFragment : Fragment() {
@@ -49,17 +46,22 @@ class MainFragment : Fragment() {
             runBlocking {
                 withContext(Dispatchers.IO) {
                     val forecast = interactor.getForecast("Moscow")
-                    tvTemperature.text = forecast.current.temperature.toString()
+
+                    tvTemperature.text = forecast.current.temperature.asText()
+
                     tvWind.text = requireContext().getString(
                         R.string.wind_template,
                         forecast.current.windSpeed.asFormattedString()
                     )
 
-                    tvHumidity.text = requireContext().getString(R.string.humidity_template, forecast.current.humidity)
-
+                    tvHumidity.text = requireContext().getString(
+                        R.string.humidity_template,
+                        forecast.current.humidity
+                    )
+                    ivTest.loadImage(forecast.current.iconUrl)
                     with(tvForecast) {
                         text = forecast.current.weather
-                        iconLeft(forecast.current.iconUrl)
+
                     }
                 }
             }

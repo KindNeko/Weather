@@ -20,3 +20,10 @@ fun BigDecimal.asFormattedString(
     }
     return decimalFormat.format(this)
 }
+
+fun Int.asText(): String =
+    if (this < 0) {
+        "-$this"
+    } else {
+        "+$this"
+    }
