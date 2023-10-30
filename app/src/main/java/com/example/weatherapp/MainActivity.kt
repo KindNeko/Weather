@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.weatherapp.base.navigation.MainActivityNavigator
 import com.example.weatherapp.base.navigation.Screens
-import com.example.weatherapp.fragments.MainFragment
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router

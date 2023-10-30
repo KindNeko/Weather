@@ -8,7 +8,7 @@ import com.bumptech.glide.request.transition.Transition
 
 fun TextView.iconLeft(src: String) {
     Glide.with(context)
-        .load(src)
+        .load("https:" + src)
         .into(object : CustomTarget<Drawable>() {
             override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable>?) {
                 setCompoundDrawables(resource, null, null, null)
