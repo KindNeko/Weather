@@ -19,6 +19,6 @@ val weatherModule = module {
     }
 
     single<WeatherInteractor> {
-        WeatherInteractor(WeatherFakeRepository())
+        WeatherInteractor(get())
     }
 }

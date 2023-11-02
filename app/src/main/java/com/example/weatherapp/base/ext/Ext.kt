@@ -4,6 +4,10 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
 
 fun BigDecimal.asFormattedString(
     maximumFractionDigits: Int = 2,
@@ -22,8 +26,16 @@ fun BigDecimal.asFormattedString(
 }
 
 fun Int.asText(): String =
-    if (this < 0) {
-        "-$this"
-    } else {
-        "+$this"
+    when {
+        this < 0 -> "-$this"
+        this > 0 -> "+$this"
+        else -> "0"
     }
+
+fun LocalDate.dayOfWeekName(style: TextStyle = TextStyle.FULL): String {
+    return this.dayOfWeek.getDisplayName(style, Locale.getDefault())
+}
+
+fun LocalDate.formattedDate(): String {
+    return this.format(DateTimeFormatter.ofPattern("dd MMM uuuu"))
+}

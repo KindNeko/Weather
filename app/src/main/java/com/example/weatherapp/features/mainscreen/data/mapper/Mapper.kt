@@ -6,6 +6,7 @@ import com.example.weatherapp.features.mainscreen.domain.model.CurrentForecast
 import com.example.weatherapp.features.mainscreen.domain.model.DailyForecast
 import com.example.weatherapp.features.mainscreen.domain.model.Day
 import com.example.weatherapp.features.mainscreen.domain.model.Forecast
+import java.time.LocalDate
 
 fun DailyRemote.toDomain(): Day =
     Day(
@@ -24,5 +25,6 @@ fun ForecastRemote.toDomain(): Forecast =
         ),
         daily = DailyForecast(
             days = forecast.forecasts.map { it.toDomain() }
+                .filter { it.date != LocalDate.now().toString() }
         )
     )

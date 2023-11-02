@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
 
-class Horizontal_RecyclerView:RecyclerView.Adapter<Horizontal_RecyclerView.MyViewHolder>() {
-
+class HorizontalAdapter: RecyclerView.Adapter<HorizontalAdapter.MyViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater
             .from(parent.context)

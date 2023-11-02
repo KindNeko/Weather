@@ -5,12 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
+import com.example.weatherapp.adapter.HorizontalAdapter
 import com.example.weatherapp.base.ext.asFormattedString
 import com.example.weatherapp.base.ext.asText
 import com.example.weatherapp.base.ext.loadImage
 import com.example.weatherapp.databinding.FragmentMainBinding
 import com.example.weatherapp.features.mainscreen.domain.WeatherInteractor
+import com.example.weatherapp.features.mainscreen.ui.adapter.DailyForecastsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -28,6 +32,9 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val interactor by inject<WeatherInteractor>()
+    private val dailyForecastsAdapter: DailyForecastsAdapter by lazy {
+        DailyForecastsAdapter(emptyList())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +47,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initAdapter()
         with(binding) {
 
 
@@ -58,16 +66,35 @@ class MainFragment : Fragment() {
                         R.string.humidity_template,
                         forecast.current.humidity
                     )
-                    ivTest.loadImage(forecast.current.iconUrl)
+//                    ivTest.loadImage(forecast.current.iconUrl)
+
                     with(tvForecast) {
                         text = forecast.current.weather
 
                     }
+
+                    dailyForecastsAdapter.updateList(forecast.daily.days)
+
                 }
             }
 
         }
 
+    }
+
+    private fun initAdapter() {
+        binding.rvContent.apply {
+            adapter = dailyForecastsAdapter
+            layoutManager = object : LinearLayoutManager(
+                requireContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            ) {
+                override fun canScrollHorizontally(): Boolean {
+                    return false
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

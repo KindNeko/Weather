@@ -9,7 +9,7 @@ interface WeatherApi {
     suspend fun getForecast(
         @Query("q") city: String,
         @Query("key") key: String = "94a05bc4cbb9403baa7160802232810",
-        @Query("days") days: Int = 4,
+        @Query("days") days: Int = 5,
         @Query("alerts") alerts: String = "no",
         @Query("aqi") aqi: String = "no"
     ): ForecastRemote
