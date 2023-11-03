@@ -5,6 +5,8 @@ import com.example.weatherapp.features.mainscreen.data.WeatherFakeRepository
 import com.example.weatherapp.features.mainscreen.data.WeatherRepository
 import com.example.weatherapp.features.mainscreen.data.WeatherRepositoryImpl
 import com.example.weatherapp.features.mainscreen.domain.WeatherInteractor
+import com.example.weatherapp.features.mainscreen.ui.MainFragmentViewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.create
@@ -20,5 +22,12 @@ val weatherModule = module {
 
     single<WeatherInteractor> {
         WeatherInteractor(get())
+    }
+
+    viewModel<MainFragmentViewModel> {
+        MainFragmentViewModel(
+            interactor = get(),
+            router = get()
+        )
     }
 }

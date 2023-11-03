@@ -1,5 +1,9 @@
 package com.example.weatherapp.base.ext
 
+import com.example.weatherapp.base.core.Either
+import com.example.weatherapp.features.mainscreen.domain.model.CurrentForecast
+import com.example.weatherapp.features.mainscreen.domain.model.DailyForecast
+import com.example.weatherapp.features.mainscreen.domain.model.Forecast
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -39,3 +43,13 @@ fun LocalDate.dayOfWeekName(style: TextStyle = TextStyle.FULL): String {
 fun LocalDate.formattedDate(): String {
     return this.format(DateTimeFormatter.ofPattern("dd MMM uuuu"))
 }
+
+inline fun <reified T> attempt(func: () -> T): Either<Throwable, T> = try {
+    Either.Right(func.invoke())
+} catch (e: Throwable) {
+    Either.Left(e)
+}
+
+fun BigDecimal.isZero(): Boolean = this == BigDecimal.ZERO
+
+fun Int.isZero(): Boolean = this == 0

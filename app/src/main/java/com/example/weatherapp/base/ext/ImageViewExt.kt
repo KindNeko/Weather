@@ -5,7 +5,7 @@ import com.bumptech.glide.Glide
 
 fun ImageView.loadImage(src: String) {
     Glide.with(context)
-        .load(src)
+        .load("https:$src")
         .centerInside()
         .into(this)
 }
