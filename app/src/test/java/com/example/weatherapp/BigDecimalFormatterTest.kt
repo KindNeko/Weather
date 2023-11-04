@@ -8,7 +8,7 @@ import java.math.BigDecimal
 class BigDecimalFormatterTest {
 
     @Test
-    fun `minimum fraction test`() {
+    fun `zero fractions test`() {
         val expected = "10"
         val actual = BigDecimal(10.0035).asFormattedString()
 
@@ -16,7 +16,7 @@ class BigDecimalFormatterTest {
     }
 
     @Test
-    fun `maximum fraction test`() {
+    fun `two digits fraction test`() {
         val expected = "10.25"
         val actual = BigDecimal(10.2535).asFormattedString()
 
@@ -24,7 +24,7 @@ class BigDecimalFormatterTest {
     }
 
     @Test
-    fun `fraction test`() {
+    fun `one digit fraction test`() {
         val expected = "10.2"
         val actual = BigDecimal(10.2035).asFormattedString()
 

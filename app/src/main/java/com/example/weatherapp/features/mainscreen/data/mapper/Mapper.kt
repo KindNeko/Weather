@@ -14,6 +14,9 @@ fun DailyRemote.toDomain(): Day =
         iconUrl = day.condition.icon
     )
 
+fun List<DailyRemote>.toDomain(): List<Day> =
+    this.map { it.toDomain() }.filter { it.date != LocalDate.now().toString() }
+
 fun ForecastRemote.toDomain(): Forecast =
     Forecast(
         current = CurrentForecast(
@@ -24,7 +27,6 @@ fun ForecastRemote.toDomain(): Forecast =
             humidity = current.humidity
         ),
         daily = DailyForecast(
-            days = forecast.forecasts.map { it.toDomain() }
-                .filter { it.date != LocalDate.now().toString() }
+            days = forecast.forecasts.toDomain()
         )
     )
