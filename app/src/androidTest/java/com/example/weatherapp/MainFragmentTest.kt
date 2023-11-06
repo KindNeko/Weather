@@ -12,6 +12,7 @@ import org.junit.runner.RunWith
 class MainFragmentTest : TestBase() {
     @Test
     fun testAllViewsAreDisplayed() {
+        Thread.sleep(2000)
         onView(withId(R.id.tvTemperature)).check(matches(isDisplayed()))
         onView(withId(R.id.ivForecastIcon)).check(matches(isDisplayed()))
         onView(withId(R.id.tvForecast)).check(matches(isDisplayed()))
