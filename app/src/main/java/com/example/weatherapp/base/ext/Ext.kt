@@ -37,7 +37,7 @@ fun Int.asText(): String =
     }
 
 fun LocalDate.dayOfWeekName(style: TextStyle = TextStyle.FULL): String {
-    return this.dayOfWeek.getDisplayName(style, Locale.getDefault())
+    return this.dayOfWeek.getDisplayName(style, Locale.ENGLISH)
 }
 
 fun LocalDate.formattedDate(): String {
